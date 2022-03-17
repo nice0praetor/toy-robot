@@ -1,0 +1,17 @@
+{
+    "name": "toy-robot",
+    "version": "1.0.0",
+    "description": "MrYum Engineering Challenge",
+    "main": "index.js",
+    "scripts": {
+        "start": "tsc && node dist/index.js",
+        "lint": "eslint . --ext .ts",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^17.0.21",
+        "typescript": "^4.6.2"
+    }
+}
