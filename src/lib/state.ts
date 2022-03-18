@@ -13,19 +13,44 @@ export class GameState {
     robot: Robot;
 
     perform(command: Command, coordinate?: Coordinate, direction?: Direction) {
+        let updatedPosition: Coordinate;
+        let updatedDirection: Direction;
+
+        // If robot has not be initialised, only the place command is valid
+        if (!this.robot && command != Command.Place) {return;}
+
         switch (command) {
             case Command.Place: {
-                // Ignore attempts to place robot outside of bounds
-                if (!this.table.withinBounds(coordinate)) {
-                    break;
-                }
-                this.robot = {direction: direction, position: coordinate};
+                updatedPosition = coordinate;
+                updatedDirection = direction;
                 break;
             }
-            case Command.Move: {break}
-            case Command.Left: {break}
-            case Command.Right: {break}
-            case Command.Report: {break}
+            case Command.Move: {break;}
+            case Command.Left: {break;}
+            case Command.Right: {break;}
+            case Command.Report: {break;}
+
+        }
+
+        // Only update position if the new position is within bounds
+        if (updatedPosition && this.table.withinBounds(updatedPosition)) {
+            this.setOrInitRobot(updatedPosition)
+        }
+
+        // Only update direction if robot has been initialised
+        if (updatedDirection && this.robot) {
+            this.robot.direction = updatedDirection;
+        }
+    }
+
+    /** Sets the position of the robot if it exists, otherwise init
+     * At the provided coordinates
+     * */
+    private setOrInitRobot(coordinates: Coordinate) {
+        if (this.robot) {
+            this.robot.position = coordinates
+        } else {
+            this.robot = {position: coordinates, direction: Direction.North};
         }
     }
 }
