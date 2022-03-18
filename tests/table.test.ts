@@ -1,4 +1,4 @@
-import { Table } from '../src/lib/Table';
+import { Table } from '../src/lib/table';
 
 describe('bounds check', () => {
     test('fails with negative coordinates', () => {

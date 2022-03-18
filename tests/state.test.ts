@@ -1,4 +1,4 @@
-import { GameState, Command } from '../src/lib/State';
+import { GameState, Command } from '../src/lib/state';
 import { Direction } from '../src/lib/table';
 
 describe('place command', () => {
