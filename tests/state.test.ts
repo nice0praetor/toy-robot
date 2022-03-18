@@ -30,3 +30,45 @@ describe('place command', () => {
         expect(state.robot).toEqual({direction: Direction.East, position: {x: 2, y: 2}});
     });
 });
+
+describe('left command', () => {
+    test('does not initialise new robot', () => {
+        const state = new GameState();
+        state.perform(Command.Left)
+        expect(state.robot).toBeUndefined();
+    });
+
+    test('updates robot direction correctly', () => {
+        const state = new GameState();
+        state.robot = {direction: Direction.North, position: {x: 0, y: 0}};
+        state.perform(Command.Left)
+        expect(state.robot.direction).toEqual(Direction.West);
+        state.perform(Command.Left)
+        expect(state.robot.direction).toEqual(Direction.South);
+        state.perform(Command.Left)
+        expect(state.robot.direction).toEqual(Direction.East);
+        state.perform(Command.Left)
+        expect(state.robot.direction).toEqual(Direction.North);
+    });
+});
+
+describe('right command', () => {
+    test('does not initialise new robot', () => {
+        const state = new GameState();
+        state.perform(Command.Right)
+        expect(state.robot).toBeUndefined();
+    });
+
+    test('updates robot direction correctly', () => {
+        const state = new GameState();
+        state.robot = {direction: Direction.North, position: {x: 0, y: 0}};
+        state.perform(Command.Right)
+        expect(state.robot.direction).toEqual(Direction.East);
+        state.perform(Command.Right)
+        expect(state.robot.direction).toEqual(Direction.South);
+        state.perform(Command.Right)
+        expect(state.robot.direction).toEqual(Direction.West);
+        state.perform(Command.Right)
+        expect(state.robot.direction).toEqual(Direction.North);
+    });
+});

@@ -26,8 +26,14 @@ export class GameState {
                 break;
             }
             case Command.Move: {break;}
-            case Command.Left: {break;}
-            case Command.Right: {break;}
+            case Command.Left: {
+                updatedDirection = (this.robot.direction - 1  + 4) % 4
+                break;
+            }
+            case Command.Right: {
+                updatedDirection = (this.robot.direction + 1  + 4) % 4
+                break;
+            }
             case Command.Report: {break;}
 
         }
@@ -38,7 +44,7 @@ export class GameState {
         }
 
         // Only update direction if robot has been initialised
-        if (updatedDirection && this.robot) {
+        if (typeof updatedDirection !== 'undefined' && this.robot) {
             this.robot.direction = updatedDirection;
         }
     }
