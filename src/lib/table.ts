@@ -7,11 +7,11 @@ export class Table {
         this.height = height;
     }
 
-    public withinBounds(x: number, y: number) {
-        return -1 < x &&
-            x < this.height &&
-            -1 < y &&
-            y < this.width;
+    public withinBounds(coordinate: Coordinate) {
+        return -1 < coordinate.x &&
+            coordinate.x < this.height &&
+            -1 < coordinate.y &&
+            coordinate.y < this.width;
     }
 }
 
