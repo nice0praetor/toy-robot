@@ -25,7 +25,25 @@ export class GameState {
                 updatedDirection = direction;
                 break;
             }
-            case Command.Move: {break;}
+            case Command.Move: {
+
+                // Directions < 2 (North, East) decrement along their respective axis
+                const positionalChange  = this.robot.direction < 2 ? 1 : -1;
+                // Should movement take place along y axis
+                const yAxis  = this.robot.direction % 2;
+
+                const relativeCoordinateChange = {
+                    x: yAxis ? 0 : positionalChange,
+                    y: yAxis ? positionalChange : 0
+                };
+
+                updatedPosition = {
+                    x: this.robot.position.x + relativeCoordinateChange.x,
+                    y: this.robot.position.y + relativeCoordinateChange.y
+                };
+
+                break;
+            }
             case Command.Left: {
                 updatedDirection = (this.robot.direction - 1  + 4) % 4
                 break;

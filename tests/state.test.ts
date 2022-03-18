@@ -72,3 +72,46 @@ describe('right command', () => {
         expect(state.robot.direction).toEqual(Direction.North);
     });
 });
+
+describe('move command', () => {
+    test('does not initialise new robot', () => {
+        const state = new GameState();
+        state.perform(Command.Move)
+        expect(state.robot).toBeUndefined();
+    });
+
+    test('does not move robot off board', () => {
+        const state = new GameState();
+        state.robot = {direction: Direction.West, position: {x: 0, y: 0}}
+        state.perform(Command.Move)
+        expect(state.robot.position).toEqual({x: 0, y: 0});
+    });
+
+    test('updates robot position along x axis', () => {
+        const state = new GameState();
+        state.robot = {direction: Direction.North, position: {x: 0, y: 0}}
+        state.perform(Command.Move)
+        expect(state.robot.position).toEqual({x: 1, y: 0});
+        state.perform(Command.Move)
+        expect(state.robot.position).toEqual({x: 2, y: 0});
+        state.robot.direction = Direction.South;
+        state.perform(Command.Move)
+        expect(state.robot.position).toEqual({x: 1, y: 0});
+        state.perform(Command.Move)
+        expect(state.robot.position).toEqual({x: 0, y: 0});
+    });
+
+    test('updates robot position along y axis', () => {
+        const state = new GameState();
+        state.robot = {direction: Direction.East, position: {x: 0, y: 0}}
+        state.perform(Command.Move)
+        expect(state.robot.position).toEqual({x: 0, y: 1});
+        state.perform(Command.Move)
+        expect(state.robot.position).toEqual({x: 0, y: 2});
+        state.robot.direction = Direction.West;
+        state.perform(Command.Move)
+        expect(state.robot.position).toEqual({x: 0, y: 1});
+        state.perform(Command.Move)
+        expect(state.robot.position).toEqual({x: 0, y: 0});
+    });
+});
