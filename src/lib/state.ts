@@ -52,7 +52,9 @@ export class GameState {
                 updatedDirection = (this.robot.direction + 1  + 4) % 4
                 break;
             }
-            case Command.Report: {break;}
+            case Command.Report: {
+                console.log(`${this.robot.position.x},${this.robot.position.y},${Direction[this.robot.direction]}`)
+            }
 
         }
 
