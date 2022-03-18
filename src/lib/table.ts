@@ -9,8 +9,8 @@ export class Table {
     }
 
     /** Tests provided coordinates against the table's bounds
-    * @returns boolean true if within bounds false if outside
-    * */
+     * @returns boolean true if within bounds false if outside
+     * */
     public withinBounds(coordinate: Coordinate) {
         return -1 < coordinate.x &&
             coordinate.x < this.height &&
