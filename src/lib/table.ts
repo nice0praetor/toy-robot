@@ -1,6 +1,6 @@
 export class Table {
-    width: number;
-    height: number;
+    private width: number;
+    private height: number;
 
     constructor(width: number, height: number) {
         this.width = width;
@@ -13,4 +13,12 @@ export class Table {
             -1 < y &&
             y < this.width;
     }
+}
+
+export type Coordinate = {x: number, y: number}
+export enum Direction {North = 1, South = 2, East = 3, West = 4}
+
+export type Robot = {
+    position: Coordinate
+    direction: Direction
 }
