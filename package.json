@@ -2,13 +2,13 @@
     "name": "toy-robot",
     "version": "1.0.0",
     "description": "MrYum Engineering Challenge",
-    "main": "index.js",
     "scripts": {
-        "start": "tsc && node dist/index.js",
+        "start": "tsc && node dist/src/index.js",
         "lint": "eslint . --ext .ts",
         "test": "jest --coverage"
     },
     "author": "",
+    "type": "module",
     "license": "ISC",
     "devDependencies": {
         "@types/jest": "^27.4.1",
