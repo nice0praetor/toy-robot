@@ -3,9 +3,10 @@
     "version": "1.0.0",
     "description": "MrYum Engineering Challenge",
     "scripts": {
-        "start": "tsc && node dist/src/index.js",
+        "start": "npm run build && node dist/src/index.js",
         "lint": "eslint . --ext .ts",
-        "test": "jest --coverage"
+        "test": "jest --coverage",
+        "build": "rm -rf ./dist && tsc"
     },
     "author": "",
     "type": "module",
@@ -18,6 +19,7 @@
         "eslint": "^8.11.0",
         "jest": "^27.5.1",
         "ts-jest": "^27.1.3",
+        "ts-node": "^10.7.0",
         "typescript": "^4.6.2"
     }
 }
