@@ -1,22 +1,23 @@
 import { Table, Robot, Coordinate, Direction} from './table'
-import { Operation } from './command'
+import { Operation, Command, PlaceCommand } from './command'
 
 
 export class GameState {
     table = new Table(5,5);
     robot: Robot;
 
-    perform(command: Operation, coordinate?: Coordinate, direction?: Direction) {
+    perform(command: Command) {
         let updatedPosition: Coordinate;
         let updatedDirection: Direction;
 
         // If robot has not be initialised, only the place command is valid
-        if (!this.robot && command != Operation.PLACE) {return;}
+        if (!this.robot && command.operation != Operation.PLACE) {return;}
 
-        switch (command) {
+        switch (command.operation) {
             case Operation.PLACE: {
-                updatedPosition = coordinate;
-                updatedDirection = direction;
+                const palceCommand = (command as PlaceCommand);
+                updatedPosition = palceCommand.coordinate;
+                updatedDirection = palceCommand.direction;
                 break;
             }
             case Operation.MOVE: {
@@ -70,7 +71,7 @@ export class GameState {
         if (this.robot) {
             this.robot.position = coordinates
         } else {
-            this.robot = {position: coordinates, direction: Direction.North};
+            this.robot = {position: coordinates, direction: Direction.NORTH};
         }
     }
 }

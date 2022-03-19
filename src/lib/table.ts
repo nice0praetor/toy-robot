@@ -20,7 +20,7 @@ export class Table {
 }
 
 export type Coordinate = {x: number, y: number}
-export enum Direction {North = 0, East = 1, South = 2, West = 3}
+export enum Direction {NORTH = 0, EAST = 1, SOUTH = 2, WEST = 3}
 
 export type Robot = {
     position: Coordinate
