@@ -1,31 +1,25 @@
 import { Table, Robot, Coordinate, Direction} from './table'
+import { Operation } from './command'
 
-export enum Command {
-    Place,
-    Move,
-    Left,
-    Right,
-    Report
-}
 
 export class GameState {
     table = new Table(5,5);
     robot: Robot;
 
-    perform(command: Command, coordinate?: Coordinate, direction?: Direction) {
+    perform(command: Operation, coordinate?: Coordinate, direction?: Direction) {
         let updatedPosition: Coordinate;
         let updatedDirection: Direction;
 
         // If robot has not be initialised, only the place command is valid
-        if (!this.robot && command != Command.Place) {return;}
+        if (!this.robot && command != Operation.Place) {return;}
 
         switch (command) {
-            case Command.Place: {
+            case Operation.Place: {
                 updatedPosition = coordinate;
                 updatedDirection = direction;
                 break;
             }
-            case Command.Move: {
+            case Operation.Move: {
 
                 // Directions < 2 (North, East) decrement along their respective axis
                 const positionalChange  = this.robot.direction < 2 ? 1 : -1;
@@ -44,15 +38,15 @@ export class GameState {
 
                 break;
             }
-            case Command.Left: {
+            case Operation.Left: {
                 updatedDirection = (this.robot.direction - 1  + 4) % 4
                 break;
             }
-            case Command.Right: {
+            case Operation.Right: {
                 updatedDirection = (this.robot.direction + 1  + 4) % 4
                 break;
             }
-            case Command.Report: {
+            case Operation.Report: {
                 console.log(`${this.robot.position.x},${this.robot.position.y},${Direction[this.robot.direction]}`)
             }
 
