@@ -3,13 +3,12 @@
     "version": "1.0.0",
     "description": "MrYum Engineering Challenge",
     "scripts": {
-        "start": "npm run build && node dist/src/index.js",
+        "start": "ts-node src/index.ts",
         "lint": "eslint . --ext .ts",
         "test": "jest --coverage",
         "build": "rm -rf ./dist && tsc"
     },
     "author": "",
-    "type": "module",
     "license": "ISC",
     "devDependencies": {
         "@types/jest": "^27.4.1",
