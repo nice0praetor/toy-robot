@@ -110,12 +110,12 @@ describe('move Operation', () => {
 
     test('updates robot position along x axis', () => {
         const state = new GameState();
-        state.robot = {direction: Direction.NORTH, position: {x: 0, y: 0}}
+        state.robot = {direction: Direction.EAST, position: {x: 0, y: 0}}
         state.perform({operation: Operation.MOVE});
         expect(state.robot.position).toEqual({x: 1, y: 0});
         state.perform({operation: Operation.MOVE});
         expect(state.robot.position).toEqual({x: 2, y: 0});
-        state.robot.direction = Direction.SOUTH;
+        state.robot.direction = Direction.WEST;
         state.perform({operation: Operation.MOVE});
         expect(state.robot.position).toEqual({x: 1, y: 0});
         state.perform({operation: Operation.MOVE});
@@ -124,12 +124,12 @@ describe('move Operation', () => {
 
     test('updates robot position along y axis', () => {
         const state = new GameState();
-        state.robot = {direction: Direction.EAST, position: {x: 0, y: 0}}
+        state.robot = {direction: Direction.NORTH, position: {x: 0, y: 0}}
         state.perform({operation: Operation.MOVE});
         expect(state.robot.position).toEqual({x: 0, y: 1});
         state.perform({operation: Operation.MOVE});
         expect(state.robot.position).toEqual({x: 0, y: 2});
-        state.robot.direction = Direction.WEST;
+        state.robot.direction = Direction.SOUTH;
         state.perform({operation: Operation.MOVE});
         expect(state.robot.position).toEqual({x: 0, y: 1});
         state.perform({operation: Operation.MOVE});

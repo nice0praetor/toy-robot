@@ -24,12 +24,12 @@ export class GameState {
 
                 // Directions < 2 (North, East) decrement along their respective axis
                 const positionalChange  = this.robot.direction < 2 ? 1 : -1;
-                // Should movement take place along y axis
-                const yAxis  = this.robot.direction % 2;
+                // Should movement take place along x axis
+                const xAxis  = this.robot.direction % 2;
 
                 const relativeCoordinateChange = {
-                    x: yAxis ? 0 : positionalChange,
-                    y: yAxis ? positionalChange : 0
+                    x: xAxis ? positionalChange : 0,
+                    y: xAxis ? 0 : positionalChange
                 };
 
                 updatedPosition = {
