@@ -1,9 +1,9 @@
 export enum Operation {
-    Place = "PLACE",
-    Move = "MOVE",
-    Left = "LEFT",
-    Right = "RIGHT",
-    Report = "REPORT"
+    PLACE,
+    MOVE,
+    LEFT,
+    RIGHT,
+    REPORT
 }
 
 export type Command = {

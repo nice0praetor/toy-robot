@@ -11,15 +11,15 @@ export class GameState {
         let updatedDirection: Direction;
 
         // If robot has not be initialised, only the place command is valid
-        if (!this.robot && command != Operation.Place) {return;}
+        if (!this.robot && command != Operation.PLACE) {return;}
 
         switch (command) {
-            case Operation.Place: {
+            case Operation.PLACE: {
                 updatedPosition = coordinate;
                 updatedDirection = direction;
                 break;
             }
-            case Operation.Move: {
+            case Operation.MOVE: {
 
                 // Directions < 2 (North, East) decrement along their respective axis
                 const positionalChange  = this.robot.direction < 2 ? 1 : -1;
@@ -38,15 +38,15 @@ export class GameState {
 
                 break;
             }
-            case Operation.Left: {
+            case Operation.LEFT: {
                 updatedDirection = (this.robot.direction - 1  + 4) % 4
                 break;
             }
-            case Operation.Right: {
+            case Operation.RIGHT: {
                 updatedDirection = (this.robot.direction + 1  + 4) % 4
                 break;
             }
-            case Operation.Report: {
+            case Operation.REPORT: {
                 console.log(`${this.robot.position.x},${this.robot.position.y},${Direction[this.robot.direction]}`)
             }
 
