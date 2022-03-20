@@ -1,4 +1,4 @@
-import { Table, Robot, Coordinate, Direction} from './table'
+import { Table, Robot, Coordinate, Direction, rotateDirection90 } from './table'
 import { Operation, Command, PlaceCommand } from './command'
 
 
@@ -6,6 +6,9 @@ export class GameState {
     table = new Table(5,5);
     robot: Robot;
 
+    /**
+     * Perform an command against the GameState.
+     **/
     perform(command: Command) {
         let updatedPosition: Coordinate;
         let updatedDirection: Direction;
@@ -40,11 +43,11 @@ export class GameState {
                 break;
             }
             case Operation.LEFT: {
-                updatedDirection = (this.robot.direction - 1  + 4) % 4
+                updatedDirection = rotateDirection90(this.robot.direction, -1);
                 break;
             }
             case Operation.RIGHT: {
-                updatedDirection = (this.robot.direction + 1  + 4) % 4
+                updatedDirection = rotateDirection90(this.robot.direction, 1)
                 break;
             }
             case Operation.REPORT: {

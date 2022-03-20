@@ -21,16 +21,24 @@ export type PlaceCommand = BaseCommand & {
 export type Command = BaseCommand | PlaceCommand;
 
 const COMMAND_SYNTAX = /^(\w+)( (\w+,*)+)?$/gi
-export const parseCommand = ((line: string): Command => {
-    COMMAND_SYNTAX.lastIndex = 0;
+// Capture group positions within command syntax
+const OPERATION_CAPTURE = 1
+const OPERANDS_CAPTURE = 2
 
+/**
+ * Parse a string into a Command object.
+ **/
+export const parseCommand = ((line: string): Command => {
+    COMMAND_SYNTAX.lastIndex = 0; //Reset regex internal pointer
+
+    // Search for known command syntax in input
     const matches = COMMAND_SYNTAX.exec(line.trim());
     if (!matches) {
         console.error("Could not parse command. Please try again.");
         return null;
     }
 
-    const operation = Operation[matches[1].toUpperCase()];
+    const operation = Operation[matches[OPERATION_CAPTURE].toUpperCase()];
 
     if (! (operation in Operation)) {
         console.error(`Operation ${operation} not supported.`);
@@ -38,14 +46,19 @@ export const parseCommand = ((line: string): Command => {
     }
 
     if (operation == Operation.PLACE) {
-        const operands = matches[2]?.trim().split(',').filter(i => i)
+        // Position of operands within capture group
+        const X_POS = 0;
+        const Y_POS = 1;
+        const DIRECTION_POS = 2;
+
+        const operands = matches[OPERANDS_CAPTURE]?.trim().split(',').filter(i => i)
 
         if (operands?.length < 3 || operands?.length > 3)  {
             console.error("Incorrect input for command PLACE");
             return null;
         }
 
-        const direction = Direction[operands[2].toUpperCase()];
+        const direction = Direction[operands[DIRECTION_POS].toUpperCase()];
 
         if (!( direction in Direction)) {
             console.error('Invalid direction');
@@ -54,8 +67,8 @@ export const parseCommand = ((line: string): Command => {
 
 
         const coordinates = {
-            x: parseInt(operands[0]),
-            y: parseInt(operands[1])
+            x: parseInt(operands[X_POS]),
+            y: parseInt(operands[Y_POS])
         }
 
         if (isNaN(coordinates.x) || isNaN(coordinates.y)) {
