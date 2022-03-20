@@ -1,7 +1,7 @@
 {
     "name": "toy-robot",
     "version": "1.0.0",
-    "description": "MrYum Engineering Challenge",
+    "description": "Engineering Challenge",
     "scripts": {
         "start": "ts-node src/index.ts",
         "lint": "eslint . --ext .ts",
